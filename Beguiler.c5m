@@ -1,0 +1,668 @@
+
+# Beguiler
+# Conquest of Elysium 5
+# Version 1.0.0
+# Authored by Anthogonyst
+# Write feedback or open issues at:  https://github.com/Anthogonyst/COE5_Beguiler
+
+# ---------- Required Mod Information --------------------------- #
+
+icon "beguiler_icon.png" # Icon shown when selecting the mod in CoE5. It should be a 256*64 large TGA or PNG image.
+description "A 'pacifist' playthrough with unfortunate accidents of varying degrees to find salvation in Lizard Jesus."
+
+# ---------- New Rituals ---------------------------------------- #
+
+newritpow                        # Ctis rituals aka beguiler rituals
+
+newritual     "Lesser Ritual of Mastery"
+level                          1
+cost                        0 30 # Costs 30 Gold
+newrit                         1
+soundfx                       57 # Sound effect when the ritual is cast: orchhit.smp (Summoning).
+free
+
+newritual     "Ritual of Mastery"
+level                          1
+cost                       0 120 # Costs 120 Gold
+newrit                         2 # Grants a new ritual of this lvl
+levelup                        2
+rebatelvl                      1
+soundfx                       57 # Sound effect when the ritual is cast: orchhit.smp (Summoning).
+free
+
+newritual     "Ritual of Grand Mastery"
+level                          2
+cost                       0 250 # Costs 250 Gold
+newrit                         3 # Grants a new ritual of this lvl
+levelup                        3
+rebatelvl                      2
+soundfx                       57 # Sound effect when the ritual is cast: orchhit.smp (Summoning).
+free
+
+newritual     "Bestow Spears"
+descr         "Give your believers a better means of fending off nature."
+level                           1
+cost                         0 20 # Costs 20 gold
+promotion                     10 # Upgrades 10 units
+addstring             "Believer" # From
+addstring       "Lizard Militia" # To
+soundfx                       57 # Sound effect when the ritual is cast: orchhit.smp (Summoning).
+free
+
+newritual     "Bestow Slings"
+descr         "Give your believers a better means of fending off nature."
+level                           1
+cost                        0 30 # Costs 30 gold
+promotion                     10 # Upgrades 10 units
+addstring             "Believer" # From
+addstring       "Lizard Slinger" # To
+soundfx                       57 # Sound effect when the ritual is cast: orchhit.smp (Summoning).
+
+newritual     "Bestow Unlife"
+descr         "With the guidance of the Grave Consort, learn the means of harnessing the undead to cease feeling."
+level                           1
+cost                        0 40 # Costs 40 gold
+promotion                     10 # Upgrades 10 units
+addstring             "Believer" # From
+addstring        "Flame Wielder" # To
+addstring     "(&)Grave Consort" # Requires a Grave Consort to have been recruited
+monplayerreq                   1 # Requires 1 Grave Consort owned by the player
+soundfx                       57 # Sound effect when the ritual is cast: orchhit.smp (Summoning).
+rarestart
+
+newritual     "Summon Lizard Jesus"
+descr         "Hallejah! You can only have one Lizard Jesus alive at any given moment, or else you'll lose the gold."
+level                          2
+cost                       0 500 # Costs 500 gold
+summoning
+addstring              "c*Jesus"
+addstring             "(-)Jesus"
+nomonplayerreq                 1 # Restricts to 1 Jesus per player
+soundfx                       57 # Sound effect when the ritual is cast: orchhit.smp (Summoning).
+
+newritual     "Bestow Serpent Dancers"
+descr         "By bestowing godly bows to a handful of highly dextrous believers, an effective siege can be made with a volley of arrows. Upgrades up to 10 Believers."
+level                          2 #
+cost                       0 100 # Costs 100 gold
+promotion                     10 # Upgrades 10 units
+addstring             "Believer" # From
+addstring       "Serpent Dancer" # To
+soundfx                       57 # Sound effect when the ritual is cast: orchhit.smp (Summoning).
+
+newritual     "Summon Grave Consort"
+descr         "Glean some insight on how to deal with the horrors by summoning a heretical grave consort."
+level                           2
+cost                         0 80 # Costs 80 gold
+summoning
+addstring      "c*Grave Consort"
+soundfx                       57 # Sound effect when the ritual is cast: orchhit.smp (Summoning).
+closewin                         # Closes cast ritual window.
+
+newritual     "Legend"
+descr         "Teleport with the power of capitalism."
+apcost                         0 # Costs zero action points
+level                          3
+cost                        0 10 # Costs 10 Gold
+chooseloc                      1 # Player chooses the target location.
+castertarg                       # Set target unit to ritual caster.
+teleportloc                    2 # Teleport caster's entire army to target location.
+soundfx                       23 # Sound effect when the ritual is cast: airduct.smp.
+airare                         5 # Only 5% of normal chance that AI will cast this ritual.
+closewin                         # Closes cast ritual window.
+free                             # Always start with this ritual in addition to the others.
+
+newritual     "Decorate Saint"
+descr         "Create magic items."
+level                          3
+cost                       0 150 # Costs 150 Gold
+airare                        20 # Only 20% of normal chance that AI will cast this ritual.
+level                          3
+summoning
+addstring    "c*Glorified Saint"
+soundfx                       57
+closewin                         # Closes cast ritual window.
+
+newritual     "Summon Boyfriend"
+descr         "Finally, some companionship from senpai. Don't let someone beat you to him."
+level                           3
+cost                        0 500 # Costs 500 gold
+nomonworldreq                   1 # Restricts to 1 Boyfriend in the world
+summoning
+addstring          "1*Boyfriend"
+addstring         "(-)Boyfriend"
+maxcast                        1 # Restricts to just one cast by the player
+soundfx                       57 # Sound effect when the ritual is cast: orchhit.smp (Summoning).
+
+# ---------- New Weapons ---------------------------------------- #
+
+newweapon     "Oops, weather accident"
+trgrank                        9
+range                         16
+init                           1
+dmgtype                        6 # Shock
+dmg                            6
+#aoe                            0
+look                          25 # Small lightning 25, huge lightning 24
+sound                         27 # Lightning strike
+oneshot                          # The weapon can only be used once per battle.
+an                               # The weapon ignores armor.
+shieldneg                        # The weapon ignores shields.
+tree                             # Tree/bushes/fungus are immune to this weapon.
+
+newweapon     "Scare away"
+range                          4
+init                           1
+dmgtype                        8 # Fear
+dmg                            6
+aoe                         1003 # Beam 3
+mr
+look                          10 # Charm
+sound                         22
+
+newweapon     "Convince sinners"
+range                          8
+init                           1
+dmgtype                        8 # Fear
+dmg                            8
+aoe                         2010 # Narrow cone 10
+mr
+sound                         22
+
+newweapon     "Y'all heard of Lizard Jesus?"
+range 12
+init 1
+dmgtype                       14 # Charm
+aoe                         3025 # Burst 25
+mr                               # Resisted by rolling 2d4 < Magic Resistance.
+look                           9 # Charm
+
+newweapon     "Hallelujah!"
+range                         12 #
+init                           1 #
+dmgtype                       22 # Corrupt
+dmg                           12 #
+aoe                         4069 # Burst 69
+hardmr                           # Resisted by rolling 2d6 < Magic Resistance.
+flymode                        8 # Slow line, one for each strike or square hit.
+flylook                      122 # Enslave (line)
+flysound                      94 # 
+look                           8 #
+
+newweapon     "He's whipping his cock out!"
+trgrank                        0 # Target: self.
+range                          0
+init                           4
+dmgtype                       14 # Charm
+dmg                            0 # Base damage (added to dmg value where this weapon is used).
+aoe                          999 # Area: all enemy units.
+hardmr                           # Resisted by rolling 2d6 < Magic Resistance.
+an                               # Armor negating.
+affecthuman                      # Only affects humans.
+look                           9 # Charm
+sound                         94 #
+
+newweapon     "Ooooo you like boys, ur a boykisser"
+trgrank                        0 # Target: self.
+range                          0
+init                           4
+dmgtype                       22 # Corrupt
+dmg                            0 # Base damage (added to dmg value where this weapon is used).
+aoe                          999 # Area: all enemy units.
+hardmr                           # Resisted by rolling 2d6 < Magic Resistance.
+an                               # Armor negating.
+affecthuman                      # Only affects humans.
+look                           8 #
+sound                         94 #
+
+newweapon     "Unload Reassembled Chariot"
+trgrank                        9 # Any enemy
+range                         20
+init                           1
+dmgtype                        2
+reload1
+scatter
+next
+nextdmg                        4
+flymode                        1
+flylook                       32
+flysound                      45
+sound                         -1
+
+
+# ---------- New Units ------------------------------------------ #
+
+newmonster "Lizard Jesus"
+descr      "The boykisser knows where he is at all times. He knows this because he knows who he isn't kissing. By subtracting who he is kissing from who he isn't kissing or who he isn't from who he is, he obtains a difference or deviation. The femboy subsystem uses deviations to generate corrective commands to drive the boykisser from a boy he isn't kissing to a boy that he is kissing, and arriving at a boy he wasn't kissing to a boy that he now is. Consequently, the boy that he is kissing is the boy who he wasn't kissing."
+size1x1
+spr1       "./sprites/sobek_high_priest.png"
+hp                            69
+mor                           42
+mr                            12
+armor                          4
+rank                           3
+rangedweaponbonus              0 "Hallelujah!"
+spellweaponbonus            36 3 # Command
+spellweaponbonus            14 2 # Jade Sorcery
+spellweaponbonus            64 2 # Divine Magic
+assassinweapon             1 729 # Dream Seduction: Charm.
+assassinweapon             1 729 # Dream Seduction: Charm.
+assassinweapon             1 729 # Dream Seduction: Charm.
+assassinweapon             1 729 # Dream Seduction: Charm.
+assassinweapon             1 729 # Dream Seduction: Charm.
+assassinweapon             1 729 # Dream Seduction: Charm.
+shockres                     100
+fireres                      -50
+charmres
+allitemslots                     # Has the full set of item slots.
+unaging                          # Immune to decay
+flying
+fast
+swamp
+desert
+mountain
+snow                             # Snow move
+water
+float
+gold                          12
+seduceaura                     3
+evasion                       33
+varregen                      10
+startinsanity                100
+saner                         20 # Sanity regeneration
+spiritsight
+farsight                       1
+coldblood                        # Is coldblooded
+fungus                         2 # Is an animated fungus
+libmastery                     3 # Library mastery
+horror                           # Makes independent Jesus seek out sentient people
+stray                            # Can stray away from loved and liked terrains
+aggressive
+maptele
+power                        0 3
+spawnmon                     100 # Spawns the next monster below, the Believer
+
+newmonster "Believer"
+descr      "A blind follower, desperate for anything."
+size1x1
+spr1       "./sprites/hierodule.png"
+hp                             4
+mor                            7
+mr                             4
+armor                          1
+rank                           2
+meleeweapon                3 904 # Kick: d3 Blunt damage.
+rangedweaponbonus              1 "Oops, weather accident"
+allitemslots                     # Has the full set of item slots.
+snow                             # Snow move
+unaging                          # Immune to decay
+expendable
+
+newmonster "Priest"
+descr      "Having lost their way in life, they project themselves onto other people and inadvertently create more problems. Their misfortune is so great that it draws the ire of cosmic horrors. They prepared deeply investing in armaments, holy sashes, poison constitution, and marathons but are still weak in the mind and morale."
+size1x1
+spr1       "./sprites/highpriestofctis.png"
+hp                             9
+mor                            9
+mr                             5
+armor                          1
+rank                          -1
+rangedweaponbonus              0 "Scare away"
+spellweapon                 25 1 # Prayers
+spellweapon                 16 1 # White Magic
+assassinweapon             1 729 # Dream Seduction: Charm.
+poisonres                    100
+allitemslots                     # Has the full set of item slots.
+fast
+snow                             # Snow move
+unaging                          # Immune to decay
+gold                           3
+randomitem                     5
+randomweapon                   5
+randommisc                     5
+afftarg                    16384 # Horror mark
+saner                          1 # Sanity regeneration
+acutesenses
+coldblood                        # Is coldblooded
+fungus                         2 # Is an animated fungus
+libmastery                     3 # Library mastery
+power                        0 1
+mastery                        1 # Acquiring mastery changes type (offset 1) to Arch Priest
+
+newmonster "Arch Priest"
+descr      "Through some combination of coincidence, accident, and mistake, even the most below average can sometimes rise into the status of the arch priest. Brought on by the additional attention, their paranoia reaches unprecedented levels and so too the tragedies that follow. They are deeply horror marked and pay exorbitant funds to bodyguards."
+size1x1
+spr1       "./sprites/first_king.png"
+hp                            10
+mor                            7
+mr                             7
+armor                          2
+rank                          -1
+rangedweaponbonus              0 "Convince sinners"
+spellweapon                  9 2 # Dark Magic
+spellweapon                 20 2 # Mysticism
+assassinweapon             1 729 # Dream Seduction: Charm.
+assassinweapon             1 729 # Dream Seduction: Charm.
+assassinweapon             1 729 # Dream Seduction: Charm.
+poisonres                    100
+shockres                      75
+allitemslots                     # Has the full set of item slots.
+fast
+snow                             # Snow move
+unaging                          # Immune to decay
+gold                           8
+seduceaura                     1
+evasion                       25
+randomitem                    15
+randomweapon                  15
+randommisc                    15
+randomrare                    30
+afftarg                    32768 # Greater horrormark
+saner                          3 # Sanity regeneration
+spiritsight
+coldblood                        # Is coldblooded
+fungus                         2 # Is an animated fungus
+libmastery                     3 # Library mastery
+power                        0 2
+
+newmonster "Glorified Saint"
+descr      "Bearer of the treasury and leader of the people."
+size1x1
+spr1       "./sprites/sobek_sauromancer.png"
+hp                             9
+mor                           12
+mr                            10
+armor                          1
+rank                          -1
+rangedweapon                   0 "Y'all heard of Jesus?"
+spellweaponbonus            29 3 # Wizardry
+assassinweapon             1 729 # Dream Seduction: Charm.
+assassinweapon             1 729 # Dream Seduction: Charm.
+assassinweapon             1 729 # Dream Seduction: Charm.
+assassinweapon             1 729 # Dream Seduction: Charm.
+assassinweapon             1 729 # Dream Seduction: Charm.
+fireres                      100
+allitemslots                     # Has the full set of item slots.
+snow                             # Snow move
+water
+float
+unaging                          # Immune to decay
+gold                           6
+randomweapon                 100
+randomrare                   100
+randomitem                   100
+randomitem                   100
+randommisc                   100
+randommisc                   100
+spiritsight
+coldblood                        # Is coldblooded
+fungus                         2 # Is an animated fungus
+libmastery                     3 # Library mastery
+power                        0 3
+
+newmonster "Boyfriend"
+descr      "He attac, he protecc, but most of all he kissu."
+spr1       "./sprites/sobek_sacred_guard.png"
+hp                            69
+mor                           96
+mr                            10
+str                           12
+armor                         10
+rank                          10
+rangedweaponbonus   "Golden Bow" # d6+17
+meleeweaponbonus   "Magic Sword" # d7+22
+meleeweaponbonus   "Magic Spear" # d6+22
+allitemslots                     # Has the full set of item slots.
+fast
+snow                             # Snow move
+water
+float
+unaging                          # Immune to decay
+gold                           1
+seduceaura                     3
+evasion                       75
+ethereal
+varregen                       5
+saner                         20 # Sanity regeneration
+randomweapon                 100
+randomrare                   100
+randomitem                   100
+randomitem                   100
+randommisc                   100
+randommisc                   100
+spiritsight
+farsight                       1
+huge                             # Size difference
+bentarg                        1 # Invulnerability
+power                        0 3
+maptele
+pickupanimals                  1
+semistupid
+aggressive
+horror
+
+newmonster "Grave Consort"
+descr      "As the horrors pursued the priests, some refuted the taught truths and pursued the opposite side of the same token. While it gave way to a means of dealing with the Void, tensions remain high between the Grave Consorts and the Arch Priests."
+size1x1
+spr1       "./sprites/grave_consort.png"
+hp                            10
+str                            3
+mor                           99
+mr                             9
+armor                          1
+rank                          -1
+meleeweapon                4  20 # Mace: d9 Blunt damage.
+spellweapon               68   2 # Maya Manipulation
+spellweapon               38   2 # Necromancy
+assassinweapon             1 729 # Dream Seduction: Charm.
+assassinweapon             1 729 # Dream Seduction: Charm.
+coldres                      100 # Cold immunity.
+poisonres                    100 # Poison immunity.
+shockres                      75 # Shock resistance.
+allitemslots                     # Has the full set of item slots.
+snow                             # Snow move
+water
+unaging                          # Immune to decay
+gold                           4
+iron                           3
+evasion                       25
+randomitem                    10
+randomweapon                  10
+randommisc                    10
+randomrare                     3
+power                        0 2 # Level 2 Ctis rituals
+water                            # Amphibian: The monster can enter water squares and is immune to drowning damage.
+undead
+sleepres                         # Sleep immunity.
+charmres                         # Charm immunity.
+diseaseres                       # Disease immunity.
+pierceres                        # Pierce resistance (half damage).
+allitemslots                     # Has the full set of item slots.
+inanimate                        # Unaffected by life drain, pain, death, bleeding, healing, regeneration, etc.
+saner                         30 # Sanity regeneration
+spiritsight
+coldblood                        # Is coldblooded
+fungus                         2 # Is an animated fungus
+libmastery                     3 # Library mastery
+
+newmonster "Reassembled Sieger"
+descr      "By hauling enchanted rocks through a chariot, a formidable siege weapon can be made by the Grave Consorts."
+size2x2
+spr1       "./sprites/reassembled_prince.png"
+rank                          -1
+hp                            10
+armor                          0
+mr                             6
+mor                           99
+str                            4
+siegeweapon                   30 "Unload Reassembled Chariot"
+meleeweapon                3 904 # Kick: d3 Blunt damage.
+allitemslots                     # Has the full set of item slots.
+snow                             # Snow move
+water
+immobile
+inanimate
+undead
+unaging                          # Immune to decay
+sleepres
+charmres
+diseaseres
+pierceres
+noheal
+poisonres 100
+coldres 100
+acutesenses
+coldblood                        # Is coldblooded
+fungus                         2 # Is an animated fungus
+libmastery                     3 # Library mastery
+
+# ---------- Inherited monsters --------------------------------- #
+
+newmonster "Serpent Dancer"
+copystats  "Animated Ballista"
+descr      "Wielder of a primordial bow blessed by his gods, he gracefully dances across the battlefield."
+spr1       "./sprites/serpent_dancer.png"
+allitemslots                     # Has the full set of item slots.
+snow                             # Snow move
+unaging                          # Immune to decay
+acutesenses
+coldblood                        # Is coldblooded
+fungus                         2 # Is an animated fungus
+
+newmonster "Lizard Militia"
+copystats  "Pikeneer"
+descr      "Looking like a proper pikeneer now."
+spr1       "./sprites/militia.png"
+allitemslots                     # Has the full set of item slots.
+snow                             # Snow move
+unaging                          # Immune to decay
+coldblood                        # Is coldblooded
+fungus                         2 # Is an animated fungus
+
+newmonster "Lizard Slinger"
+copystats  "Brigand"
+descr      "Looking like a proper brigand now."
+spr1       "./sprites/poison_slinger.png"
+allitemslots                     # Has the full set of item slots.
+snow                             # Snow move
+unaging                          # Immune to decay
+coldblood                        # Is coldblooded
+fungus                         2 # Is an animated fungus
+
+newmonster "Flame Wielder"
+copystats  "Bane Fire Archer"
+descr      "After becoming undead, resembles a bane fire archer now."
+spr1       "./sprites/tomb_flame_wielder.png"
+allitemslots                     # Has the full set of item slots.
+snow                             # Snow move
+water
+unaging                          # Immune to decay
+spiritsight
+fungus                         2 # Is an animated undead fungus (trust)
+
+# ---------- Create the new Buguiler player class --------------- #
+
+newclass
+setclassname          "Beguiler"
+addstartunits         "Believer" 20
+
+setmaincom              "Priest"
+addstartcom             "Priest"
+
+goldbonus                      3 # Free gold for staying alive
+ironbonus                      1 # Free iron for staying alive
+tradebonus                     2 # Free trade for staying alive
+
+classcitterr                  39 # Ancient Temples
+classcitterr                  93 # Temple Pyramid
+classcitterr                 165 # Pyramids
+classcitterr                 230 # Pyramids Beyond (Void)
+
+startplane 6                     # Aztlan
+clearstartterr                   # Doesn't spawn extra farms after clearing start
+createcit 160                    # Desert Palace
+hometerr 203                     # Gateway to Elysium
+
+
+classdescr "C'tis is a swampy river valley surrounded by sandy deserts. In the fertile valley a sacral kingdom of lizard-like humanoids has formed. The kingdom is ancient by human standards and its wisdom and magical knowledge is great. At the top of the society is the Lizard King and his Royal Heirs. The king is the highest priest of C'tis. Under the king are the High Priests with their sacred serpents and the enigmatic Sauromancers, great mages of death and rebirth. The lizards are herbivores, but have enslaved a race of carnivorous lizardmen who serve as soldiers and workers. The C'tissians are somewhat slow in movement, but have thick hides that protect them from cuts and bruises. Both lizard races are cold-blooded and become exhausted very quickly when fighting in cold provinces. They have partial resistance to poison. The inhabitants of C'tis prefer to live in warm provinces.\n\nC'tis is a nation of lizardmen under Egyptian and to some extent Mesopotamian influence. Sacred priest kings, pyramids, swamps, and flooding rivers surrounded by deserts are all elements of these cultures. Sacred priest kings celebrating hieros-gamos with hierodules atop temple ziggurats, with high priests chanting and swaying in procession under the glare of sacred serpents depicted on murals on the great walls have to me a more Mesopotamian feel than Egyptian. On the other hand, the Desert Tombs of the late age is influenced by Egyptian concepts of the dead and modern fiction on Egypt, and the lizard king might as well be a Pharaoh as a Lugal. The connection between C'tis and Ermor suggests that C'tis is more Egyptian than Mesopotamian. The sauromancers' initiation rituals are inspired by Oriental cults of the late Roman Empire, such as that of Isis and Sarapis/Osiris."
+
+libbonusdescr    "Every Library increases the chance of recruitment."
+templebonusdescr "Every Temple increases the chance of recruitment."
+
+
+# addunitrec "monster name" <chance> <nbr> <gold> <gold die> <iron>
+# addmercrec "monster name" <chance> <nbr> <gold> <gold die> <iron>
+#  addcomrec "monster name" <chance>       <gold> <gold die> <iron>
+
+# Standard units
+addunitrec      "Believer"       100  7 19  6  0 # Small believers at 20-25 gold
+
+# Small bonus
+addmercrec      "Believer"        25  7 24  6  0 # Extra; small believers at 25-30 gold
+
+addmercrec      "Believer"        60 10  4  6  0 # Extra; arch priest makes small believers at 5-10 gold
+  templerec
+  libraryrec
+  reclimiter    "+Arch Priest"                   # Owning Arch Priest enables the preceding offer
+
+# Big bonus
+addmercrec      "Believer"         0 16 25 25  0 # Extra; large believers at 26-50 gold
+  templerec
+  libraryrec
+
+addmercrec      "Believer"        60 20  9  6  0 # Extra; arch priest makes large believers at 10-15 gold
+  templerec
+  libraryrec
+  reclimiter    "+Arch Priest"                   # Owning Arch Priest enables the preceding offer
+
+# Max bonus
+addmercrec      "Believer"       100 10  1  4  0 # Extra; Lizard Jesus makes believers
+  reclimiter    "+Lizard Jesus"                  # Owning Arch Priest enables the preceding offer
+
+addmercrec      "Believer"       100 20  1  5  0 # Extra; Lizard Jesus makes believers
+  reclimiter    "+Lizard Jesus"                  # Owning Arch Priest enables the preceding offer
+
+addmercrec      "Believer"       100 30  1  7  0 # Extra; Lizard Jesus makes believers
+  reclimiter    "+Lizard Jesus"                  # Owning Arch Priest enables the preceding offer
+
+addmercrec      "Believer"       100 40  1  9  0 # Extra; Lizard Jesus makes believers
+  reclimiter    "+Lizard Jesus"                  # Owning Arch Priest enables the preceding offer
+
+# Boats
+addmercrec      "Ship"           100  2 14 16 40 # Two boats at 15-30 gold and 40 iron
+  recterr -93                                    # Owning ports enables the preceding offer.
+
+# Commanders
+addcomrec       "Priest"          11    40 40  0 # Early game commander
+  templerec
+  libraryrec
+
+addcomrec       "Priest"           6    20 20  0 # Mid game commander
+  templerec
+  libraryrec
+  reclimiter    "+Arch Priest"                   # Owning Arch Priest enables the preceding offer
+
+addcomrec       "Priest"          15    10 10  0
+  templerec
+  libraryrec
+  reclimiter    "+Lizard Jesus"                  # Owning Lizard Jesus enables the preceding offer
+
+addcomrec       "Arch Priest"      7    30 20  0
+  templerec
+  libraryrec
+  reclimiter    "+Lizard Jesus"                  # Owning Lizard Jesus enables the preceding offer.
+
+# Human Recruitments
+recwizchance                                   3 # Chance for recruitment offers from human wizards.
+templerec
+libraryrec
+
+recherochance                                  3 # Chance for recruitment offers from human heroes.
+templerec
+libraryrec
+
+recasschance                                   4 # Chance for recruitment offers from human assassins.
+templerec
+libraryrec
+
+humancost                                     33 # Cost multiplier for human recruitment at special locations
+
