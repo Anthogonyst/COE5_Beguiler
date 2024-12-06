@@ -1,14 +1,14 @@
 
 # Beguiler
 # Conquest of Elysium 5
-# Version 1.0.0
+# Version 1.0.4
 # Authored by Anthogonyst
 # Write feedback or open issues at:  https://github.com/Anthogonyst/COE5_Beguiler
 
 # ---------- Required Mod Information --------------------------- #
 
-icon "beguiler_icon.png" # Icon shown when selecting the mod in CoE5. It should be a 256*64 large TGA or PNG image.
-description "A 'pacifist' playthrough with unfortunate accidents of varying degrees to find salvation in Lizard Jesus."
+icon "beguiler_icon.png" # Icon shown when selecting the mod in CoE5.
+description "A 'pacifist' playthrough with unfortunate accidents of varying degrees. Some zealots try to find salvation in Lizard Jesus."
 
 # ---------- New Rituals ---------------------------------------- #
 
@@ -75,9 +75,9 @@ descr         "Hallejah! You can only have one Lizard Jesus alive at any given m
 level                          2
 cost                       0 500 # Costs 500 gold
 summoning
-addstring              "c*Jesus"
-addstring             "(-)Jesus"
-nomonplayerreq                 1 # Restricts to 1 Jesus per player
+addstring       "c*Lizard Jesus"
+addstring      "(-)Lizard Jesus"
+nomonplayerreq                 1 # Restricts to 1 Lizard Jesus per player
 soundfx                       57 # Sound effect when the ritual is cast: orchhit.smp (Summoning).
 
 newritual     "Bestow Serpent Dancers"
