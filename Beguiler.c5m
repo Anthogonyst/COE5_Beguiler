@@ -1,9 +1,11 @@
 
 # Beguiler
 # Conquest of Elysium 5
-# Version 1.0.4
+# Version 1.1.1
 # Authored by Anthogonyst
 # Write feedback or open issues at:  https://github.com/Anthogonyst/COE5_Beguiler
+#
+# 1.1.1 Lizard chapels. Teleportation fix.
 
 # ---------- Required Mod Information --------------------------- #
 
@@ -39,10 +41,12 @@ rebatelvl                      2
 soundfx                       57 # Sound effect when the ritual is cast: orchhit.smp (Summoning).
 free
 
+### Level 1 Rituals
+
 newritual     "Bestow Spears"
 descr         "Give your believers a better means of fending off nature."
-level                           1
-cost                         0 20 # Costs 20 gold
+level                          1
+cost                        0 20 # Costs 20 gold
 promotion                     10 # Upgrades 10 units
 addstring             "Believer" # From
 addstring       "Lizard Militia" # To
@@ -51,7 +55,7 @@ free
 
 newritual     "Bestow Slings"
 descr         "Give your believers a better means of fending off nature."
-level                           1
+level                          1
 cost                        0 30 # Costs 30 gold
 promotion                     10 # Upgrades 10 units
 addstring             "Believer" # From
@@ -60,7 +64,7 @@ soundfx                       57 # Sound effect when the ritual is cast: orchhit
 
 newritual     "Bestow Unlife"
 descr         "With the guidance of the Grave Consort, learn the means of harnessing the undead to cease feeling."
-level                           1
+level                          1
 cost                        0 40 # Costs 40 gold
 promotion                     10 # Upgrades 10 units
 addstring             "Believer" # From
@@ -70,15 +74,49 @@ monplayerreq                   1 # Requires 1 Grave Consort owned by the player
 soundfx                       57 # Sound effect when the ritual is cast: orchhit.smp (Summoning).
 rarestart
 
-newritual     "Summon Lizard Jesus"
-descr         "Hallejah! You can only have one Lizard Jesus alive at any given moment, or else you'll lose the gold."
-level                          2
-cost                       0 500 # Costs 500 gold
-summoning
-addstring       "c*Lizard Jesus"
-addstring      "(-)Lizard Jesus"
-nomonplayerreq                 1 # Restricts to 1 Lizard Jesus per player
+newritual     "Bestow Blessing"
+descr         "After the coming of Lizard Jesus, everyone can stand to gain blessings."
+level                          1
+cost                         0 5 # Costs 5 gold
+promotion                     20 # Upgrades 20 units
+addstring             "Believer" # From
+addstring       "Blessed Zealot" # To
+addstring      "(&)Lizard Jesus" # Requires Lizard Jesus to have been recruited
+monplayerreq                   1 # Requires Lizard Jesus owned by the player
 soundfx                       57 # Sound effect when the ritual is cast: orchhit.smp (Summoning).
+rarestart
+
+newritual     "Disperse Missionaries"
+descr         "Seek out all who desires to listen and circulate the news around."
+level                          1
+cost                        0 20 # Costs 20 gold
+castertarg                       # Radius is centered around the caster
+scryloc                      300 # Scrying within 3 squares radius, totaling 7 across
+soundfx                       57 # Sound effect when the ritual is cast: orchhit.smp (Summoning).
+rarestart
+
+newritual     "Convert Delinquents"
+descr         "These brigands just need a guiding hand."
+level                          1
+terr                         125 # Required terrain: Brigand Lair
+alterloc                     153 # 
+soundfx                       57 # Sound effect when the ritual is cast: orchhit.smp (Summoning).
+aialways                     999 # AI will always try to cast this ritual, and make long term plans to do so.
+airare                        20 # Only 20% of normal chance that AI will cast this ritual.
+rarestart
+
+newritual     "Create Lizard Chapels"
+descr         "Pave a means for the people of Elysium to learn about the coming of Lizard Jesus and the salvation they bring."
+level                          1
+cost                        0 15 # Costs 15 gold
+terr                         -71 # Required terrain: flat terrains.
+alterloc                       7 # Change target location's terrain to: Hamlet.
+soundfx                       57 # Sound effect when the ritual is cast: orchhit.smp (Summoning).
+airare                        70 # Only 70% of normal chance that AI will cast this ritual.
+free
+
+
+### Level 2 Rituals
 
 newritual     "Bestow Serpent Dancers"
 descr         "By bestowing godly bows to a handful of highly dextrous believers, an effective siege can be made with a volley of arrows. Upgrades up to 10 Believers."
@@ -98,6 +136,56 @@ addstring      "c*Grave Consort"
 soundfx                       57 # Sound effect when the ritual is cast: orchhit.smp (Summoning).
 closewin                         # Closes cast ritual window.
 
+newritual     "Build New Citadel"
+descr         "Creates a new temple for believers."
+level                          2
+apcost                         3 # Costs three action points
+cost                       0 100 # Costs 100 gold
+terr                         -71 # Flatland
+aiwhere                      -71
+alterloc                     278 # Sacred City
+nonearby5req                  24
+soundfx                       57
+free                             # Always start with this ritual in addition to the others.
+
+newritual     "Return for enlightenment"
+descr         "Come back to Elysium to explain to the people how to live their life to the fullest."
+level                          2
+cost                        0 30 # Costs 30 Gold
+setplane                       0 # Goes to the plane of Elysium
+randomloc                      1 # Changes to a random location
+teleportloc                    2 # Teleport caster's entire army to target location.
+noplanereq                     0 # Can't teleport while on Atzlan
+soundfx                       57
+closewin                         # Closes cast ritual window.
+centercaster
+
+newritual     "Return to lizard"
+descr         "Leave this place to seek hard truths about survival by going to Aztlan."
+level                          2
+cost                        0 30 # Costs 30 Gold
+addstring      "(&)Lizard Jesus" # Requires Lizard Jesus to have been recruited
+setplane                       6 # Goes to the plane of Atzlan
+randomloc                      1 # Changes to a random location
+teleportloc                    2 # Teleport caster's entire army to target location.
+noplanereq                     6 # Can't teleport while on Atzlan
+soundfx                       57
+closewin                         # Closes cast ritual window.
+centercaster
+
+newritual     "Summon Lizard Jesus"
+descr         "Hallejah! You can only have one Lizard Jesus alive at any given moment, or else you'll lose the gold."
+level                          2
+cost                       0 500 # Costs 500 gold
+summoning
+addstring       "c*Lizard Jesus"
+addstring      "(-)Lizard Jesus"
+nomonplayerreq                 1 # Restricts to 1 Lizard Jesus per player
+soundfx                       57 # Sound effect when the ritual is cast: orchhit.smp (Summoning).
+
+
+### Level 3 Rituals
+
 newritual     "Legend"
 descr         "Teleport with the power of capitalism."
 apcost                         0 # Costs zero action points
@@ -110,6 +198,7 @@ soundfx                       23 # Sound effect when the ritual is cast: airduct
 airare                         5 # Only 5% of normal chance that AI will cast this ritual.
 closewin                         # Closes cast ritual window.
 free                             # Always start with this ritual in addition to the others.
+centercaster
 
 newritual     "Decorate Saint"
 descr         "Create magic items."
@@ -120,7 +209,6 @@ level                          3
 summoning
 addstring    "c*Glorified Saint"
 soundfx                       57
-closewin                         # Closes cast ritual window.
 
 newritual     "Summon Boyfriend"
 descr         "Finally, some companionship from senpai. Don't let someone beat you to him."
@@ -128,15 +216,16 @@ level                           3
 cost                        0 500 # Costs 500 gold
 nomonworldreq                   1 # Restricts to 1 Boyfriend in the world
 summoning
-addstring          "1*Boyfriend"
+addstring          "c*Boyfriend"
 addstring         "(-)Boyfriend"
 maxcast                        1 # Restricts to just one cast by the player
 soundfx                       57 # Sound effect when the ritual is cast: orchhit.smp (Summoning).
+rarestart
 
 # ---------- New Weapons ---------------------------------------- #
 
 newweapon     "Oops, weather accident"
-trgrank                        9
+trgrank                        9 # Targets any enemy
 range                         16
 init                           1
 dmgtype                        6 # Shock
@@ -148,6 +237,82 @@ oneshot                          # The weapon can only be used once per battle.
 an                               # The weapon ignores armor.
 shieldneg                        # The weapon ignores shields.
 tree                             # Tree/bushes/fungus are immune to this weapon.
+
+newweapon     "Oops, cosmic accident"
+trgrank                        8 # Target: any enemy in the rear.
+range                          8
+init                           4
+dmgtype                        2 # Blunt
+dmg                            0 # Base damage (added to dmg value where this weapon is used).
+aoe                            1 # Area: burst 1.
+onlyenemy
+scatter                          # May deviate one square from intended target.
+wallkill                         # x5 dmg vs walls and boats.
+flymode                        9 # Meteor, one for each strike or square hit.
+flylook                       84
+flysound                      99 # 
+look                          69
+sound                         90 # bomb.sw
+nextalwayswep                  "Meteor Aftermath"
+nextdmg                        8 # d8 Fire damage.
+
+newweapon     "Meteor Aftermath"
+trgrank                        1 # Target: front enemy (any enemy in range, preferring front-most).
+range                          1
+init                           1
+dmgtype                        4 # Fire
+dmg                            0 # Base damage (added to dmg value where this weapon is used).
+aoe                            5 # Area: burst 5.
+onlyenemy
+look                          68
+sound                         16 # fire.smp (Fire)
+
+newweapon     "aff (mark - ez)"
+trgrank                       -9 # Target: any ally in range.
+range                          1
+init                           3
+dmgtype                       12 # Inflicts special affliction
+dmg                            0 # Base damage (added to dmg value where this weapon is used).
+easymr                           # Resisted by rolling 1d5 < Magic Resistance.
+look                          21
+
+newweapon     "aff (mark - med)"
+trgrank                       -9 # Target: any ally in range.
+range                          1
+init                           3
+dmgtype                       12 # Inflicts special affliction
+dmg                            0 # Base damage (added to dmg value where this weapon is used).
+mr                               # Resisted by rolling 2d4 < Magic Resistance.
+look                          21
+
+newweapon     "aff (paralyze)"
+trgrank                        9 # Target: any enemy in range.
+range                         10
+init                           3
+dmgtype                       12 # Inflicts special affliction
+dmg                            0 # Base damage (added to dmg value where this weapon is used).
+#                                # nextdmg 16 for paralyze effect
+aoe                            3
+look                          21
+
+newweapon     "Invoke Holy Aid"
+trgrank                        0 # Targets self
+range                          0
+init                           3
+dmgtype                        9 # Poison, but priests are poison immune
+sound                         22
+nextalwayswep  "aff (mark - ez)" # Extra effect guaranteed
+nextdmg                    16384 # Horror mark
+#nextwep       "aff (mark - ez)" # Extra effect if target is affected
+
+newweapon     "Invoke Foreign Aid"
+trgrank                        0 # Targets self
+range                          0
+init                           3
+dmgtype                        9 # Poison, but priests are poison immune
+sound                         22
+nextalwayswep "aff (mark - med)" # Extra effect guaranteed
+nextdmg                    32768 # Horror mark
 
 newweapon     "Scare away"
 range                          4
@@ -231,6 +396,22 @@ sound                         -1
 
 # ---------- New Units ------------------------------------------ #
 
+newmonster "Believer"
+descr      "A blind follower, desperate for anything."
+size1x1
+spr1       "./sprites/hierodule.png"
+hp                             4
+mor                            7
+mr                             4
+armor                          1
+rank                           2
+meleeweapon                3 904 # Kick: d3 Blunt damage.
+rangedweaponbonus              1 "Oops, weather accident"
+allitemslots                     # Has the full set of item slots.
+snow                             # Snow move
+unaging                          # Immune to decay
+expendable
+
 newmonster "Lizard Jesus"
 descr      "The boykisser knows where he is at all times. He knows this because he knows who he isn't kissing. By subtracting who he is kissing from who he isn't kissing or who he isn't from who he is, he obtains a difference or deviation. The femboy subsystem uses deviations to generate corrective commands to drive the boykisser from a boy he isn't kissing to a boy that he is kissing, and arriving at a boy he wasn't kissing to a boy that he now is. Consequently, the boy that he is kissing is the boy who he wasn't kissing."
 size1x1
@@ -261,13 +442,13 @@ swamp
 desert
 mountain
 snow                             # Snow move
-water
+water                            # Amphibian: The monster can enter water squares and is immune to drowning damage.
 float
-gold                          12
+gold                          12 # Bonus gold
 seduceaura                     3
 evasion                       33
 varregen                      10
-startinsanity                100
+startinsanity                 30
 saner                         20 # Sanity regeneration
 spiritsight
 farsight                       1
@@ -279,23 +460,16 @@ stray                            # Can stray away from loved and liked terrains
 aggressive
 maptele
 power                        0 3
-spawnmon                     100 # Spawns the next monster below, the Believer
+spawnmon                    1600 # Spawns the next monster below, the Believer
 
-newmonster "Believer"
-descr      "A blind follower, desperate for anything."
-size1x1
-spr1       "./sprites/hierodule.png"
-hp                             4
-mor                            7
-mr                             4
-armor                          1
-rank                           2
-meleeweapon                3 904 # Kick: d3 Blunt damage.
-rangedweaponbonus              1 "Oops, weather accident"
-allitemslots                     # Has the full set of item slots.
-snow                             # Snow move
-unaging                          # Immune to decay
-expendable
+newmonster "Apostle"
+copystats  "Believer"
+descr      "Having seen Lizard Jesus, their numbers grow exponentially as they need to spread the word."
+hp                             6
+mor                            11
+mr                             5
+rank                           3
+semistupid                       # Wanders away without a commander
 
 newmonster "Priest"
 descr      "Having lost their way in life, they project themselves onto other people and inadvertently create more problems. Their misfortune is so great that it draws the ire of cosmic horrors. They prepared deeply investing in armaments, holy sashes, poison constitution, and marathons but are still weak in the mind and morale."
@@ -303,9 +477,10 @@ size1x1
 spr1       "./sprites/highpriestofctis.png"
 hp                             9
 mor                            9
-mr                             5
+mr                             4
 armor                          1
 rank                          -1
+prebatweapon                   1 "Invoke Holy Aid"
 rangedweaponbonus              0 "Scare away"
 spellweapon                 25 1 # Prayers
 spellweapon                 16 1 # White Magic
@@ -315,11 +490,10 @@ allitemslots                     # Has the full set of item slots.
 fast
 snow                             # Snow move
 unaging                          # Immune to decay
-gold                           3
+gold                           3 # Bonus gold
 randomitem                     5
 randomweapon                   5
 randommisc                     5
-afftarg                    16384 # Horror mark
 saner                          1 # Sanity regeneration
 acutesenses
 coldblood                        # Is coldblooded
@@ -337,6 +511,7 @@ mor                            7
 mr                             7
 armor                          2
 rank                          -1
+prebatweapon                   1 "Invoke Foreign Aid"
 rangedweaponbonus              0 "Convince sinners"
 spellweapon                  9 2 # Dark Magic
 spellweapon                 20 2 # Mysticism
@@ -349,14 +524,13 @@ allitemslots                     # Has the full set of item slots.
 fast
 snow                             # Snow move
 unaging                          # Immune to decay
-gold                           8
+gold                           8 # Bonus gold
 seduceaura                     1
 evasion                       25
 randomitem                    15
 randomweapon                  15
 randommisc                    15
 randomrare                    30
-afftarg                    32768 # Greater horrormark
 saner                          3 # Sanity regeneration
 spiritsight
 coldblood                        # Is coldblooded
@@ -383,10 +557,10 @@ assassinweapon             1 729 # Dream Seduction: Charm.
 fireres                      100
 allitemslots                     # Has the full set of item slots.
 snow                             # Snow move
-water
+water                            # Amphibian: The monster can enter water squares and is immune to drowning damage.
 float
 unaging                          # Immune to decay
-gold                           6
+gold                           6 # Bonus gold
 randomweapon                 100
 randomrare                   100
 randomitem                   100
@@ -401,23 +575,23 @@ power                        0 3
 
 newmonster "Boyfriend"
 descr      "He attac, he protecc, but most of all he kissu."
-spr1       "./sprites/sobek_sacred_guard.png"
+spr1       "./sprites/sobek_sacred_guard_2x.png"
 hp                            69
 mor                           96
 mr                            10
 str                           12
 armor                         10
 rank                          10
-rangedweaponbonus   "Golden Bow" # d6+17
-meleeweaponbonus   "Magic Sword" # d7+22
-meleeweaponbonus   "Magic Spear" # d6+22
+rangedweaponbonus         15 674 # d6+17 "Golden Bow"
+meleeweaponbonus          20 475 # d10+22 "Magic Sword"
+meleeweaponbonus          20 606 # d6+22 "Magic Spear"
 allitemslots                     # Has the full set of item slots.
 fast
 snow                             # Snow move
-water
+water                            # Amphibian: The monster can enter water squares and is immune to drowning damage.
 float
 unaging                          # Immune to decay
-gold                           1
+gold                           1 # Bonus gold
 seduceaura                     3
 evasion                       75
 ethereal
@@ -460,9 +634,9 @@ poisonres                    100 # Poison immunity.
 shockres                      75 # Shock resistance.
 allitemslots                     # Has the full set of item slots.
 snow                             # Snow move
-water
+water                            # Amphibian: The monster can enter water squares and is immune to drowning damage.
 unaging                          # Immune to decay
-gold                           4
+gold                           4 # Bonus gold
 iron                           3
 evasion                       25
 randomitem                    10
@@ -498,7 +672,7 @@ siegeweapon                   30 "Unload Reassembled Chariot"
 meleeweapon                3 904 # Kick: d3 Blunt damage.
 allitemslots                     # Has the full set of item slots.
 snow                             # Snow move
-water
+water                            # Amphibian: The monster can enter water squares and is immune to drowning damage.
 immobile
 inanimate
 undead
@@ -514,6 +688,22 @@ acutesenses
 coldblood                        # Is coldblooded
 fungus                         2 # Is an animated fungus
 libmastery                     3 # Library mastery
+
+newmonster "Blessed Zealot"
+descr      "A blind follower, desperate for anything."
+size1x1
+spr1       "./sprites/hierodule.png"
+hp                             4
+mor                            7
+mr                             4
+armor                          1
+rank                           2
+meleeweapon                3 904 # Kick: d3 Blunt damage.
+rangedweaponbonus              1 "Oops, cosmic accident"
+allitemslots                     # Has the full set of item slots.
+snow                             # Snow move
+unaging                          # Immune to decay
+
 
 # ---------- Inherited monsters --------------------------------- #
 
@@ -554,7 +744,7 @@ descr      "After becoming undead, resembles a bane fire archer now."
 spr1       "./sprites/tomb_flame_wielder.png"
 allitemslots                     # Has the full set of item slots.
 snow                             # Snow move
-water
+water                            # Amphibian: The monster can enter water squares and is immune to drowning damage.
 unaging                          # Immune to decay
 spiritsight
 fungus                         2 # Is an animated undead fungus (trust)
@@ -572,15 +762,14 @@ goldbonus                      3 # Free gold for staying alive
 ironbonus                      1 # Free iron for staying alive
 tradebonus                     2 # Free trade for staying alive
 
-classcitterr                  39 # Ancient Temples
-classcitterr                  93 # Temple Pyramid
-classcitterr                 165 # Pyramids
 classcitterr                 230 # Pyramids Beyond (Void)
 
-startplane 6                     # Aztlan
-clearstartterr                   # Doesn't spawn extra farms after clearing start
-createcit 160                    # Desert Palace
-hometerr 203                     # Gateway to Elysium
+#startplane                     6 # Aztlan
+#clearstartterr                   # Doesn't spawn extra farms after clearing start (for non-elysium starts)
+createcit                     160 # Desert Palace
+#hometerr                     203 # Gateway to Elysium (necessary for non-elysium starts)
+
+#classtune                     125 # Somewhere between 125 to 150 for specifics or 155 to 168 for general
 
 
 classdescr "C'tis is a swampy river valley surrounded by sandy deserts. In the fertile valley a sacral kingdom of lizard-like humanoids has formed. The kingdom is ancient by human standards and its wisdom and magical knowledge is great. At the top of the society is the Lizard King and his Royal Heirs. The king is the highest priest of C'tis. Under the king are the High Priests with their sacred serpents and the enigmatic Sauromancers, great mages of death and rebirth. The lizards are herbivores, but have enslaved a race of carnivorous lizardmen who serve as soldiers and workers. The C'tissians are somewhat slow in movement, but have thick hides that protect them from cuts and bruises. Both lizard races are cold-blooded and become exhausted very quickly when fighting in cold provinces. They have partial resistance to poison. The inhabitants of C'tis prefer to live in warm provinces.\n\nC'tis is a nation of lizardmen under Egyptian and to some extent Mesopotamian influence. Sacred priest kings, pyramids, swamps, and flooding rivers surrounded by deserts are all elements of these cultures. Sacred priest kings celebrating hieros-gamos with hierodules atop temple ziggurats, with high priests chanting and swaying in procession under the glare of sacred serpents depicted on murals on the great walls have to me a more Mesopotamian feel than Egyptian. On the other hand, the Desert Tombs of the late age is influenced by Egyptian concepts of the dead and modern fiction on Egypt, and the lizard king might as well be a Pharaoh as a Lugal. The connection between C'tis and Ermor suggests that C'tis is more Egyptian than Mesopotamian. The sauromancers' initiation rituals are inspired by Oriental cults of the late Roman Empire, such as that of Isis and Sarapis/Osiris."
@@ -601,30 +790,27 @@ addmercrec      "Believer"        25  7 24  6  0 # Extra; small believers at 25-
 
 addmercrec      "Believer"        60 10  4  6  0 # Extra; arch priest makes small believers at 5-10 gold
   templerec
-  libraryrec
   reclimiter    "+Arch Priest"                   # Owning Arch Priest enables the preceding offer
 
 # Big bonus
 addmercrec      "Believer"         0 16 25 25  0 # Extra; large believers at 26-50 gold
   templerec
-  libraryrec
 
 addmercrec      "Believer"        60 20  9  6  0 # Extra; arch priest makes large believers at 10-15 gold
   templerec
-  libraryrec
   reclimiter    "+Arch Priest"                   # Owning Arch Priest enables the preceding offer
 
 # Max bonus
-addmercrec      "Believer"       100 10  1  4  0 # Extra; Lizard Jesus makes believers
+addmercrec      "Apostle"        100 10  5  5  0 # Extra; Lizard Jesus makes apostles
   reclimiter    "+Lizard Jesus"                  # Owning Arch Priest enables the preceding offer
 
-addmercrec      "Believer"       100 20  1  5  0 # Extra; Lizard Jesus makes believers
+addmercrec      "Apostle"         90 20  10 5  0 # Extra; Lizard Jesus makes apostles
   reclimiter    "+Lizard Jesus"                  # Owning Arch Priest enables the preceding offer
 
-addmercrec      "Believer"       100 30  1  7  0 # Extra; Lizard Jesus makes believers
+addmercrec      "Apostle"         80 30  15 5  0 # Extra; Lizard Jesus makes apostles
   reclimiter    "+Lizard Jesus"                  # Owning Arch Priest enables the preceding offer
 
-addmercrec      "Believer"       100 40  1  9  0 # Extra; Lizard Jesus makes believers
+addmercrec      "Apostle"         70 40  20 5  0 # Extra; Lizard Jesus makes apostles
   reclimiter    "+Lizard Jesus"                  # Owning Arch Priest enables the preceding offer
 
 # Boats
@@ -634,35 +820,28 @@ addmercrec      "Ship"           100  2 14 16 40 # Two boats at 15-30 gold and 4
 # Commanders
 addcomrec       "Priest"          11    40 40  0 # Early game commander
   templerec
-  libraryrec
 
 addcomrec       "Priest"           6    20 20  0 # Mid game commander
   templerec
-  libraryrec
   reclimiter    "+Arch Priest"                   # Owning Arch Priest enables the preceding offer
 
 addcomrec       "Priest"          15    10 10  0
   templerec
-  libraryrec
   reclimiter    "+Lizard Jesus"                  # Owning Lizard Jesus enables the preceding offer
 
 addcomrec       "Arch Priest"      7    30 20  0
   templerec
-  libraryrec
   reclimiter    "+Lizard Jesus"                  # Owning Lizard Jesus enables the preceding offer.
 
 # Human Recruitments
 recwizchance                                   3 # Chance for recruitment offers from human wizards.
-templerec
 libraryrec
 
 recherochance                                  3 # Chance for recruitment offers from human heroes.
 templerec
-libraryrec
 
 recasschance                                   4 # Chance for recruitment offers from human assassins.
 templerec
-libraryrec
 
 humancost                                     33 # Cost multiplier for human recruitment at special locations
 
